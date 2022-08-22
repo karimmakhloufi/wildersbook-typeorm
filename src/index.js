@@ -9,6 +9,13 @@ const dataSource = new typeorm.DataSource({
   synchronize: true,
   entities: [Wilder, Skill],
 });
-dataSource.initialize().then(() => {
-  dataSource.getRepository(Wilder).save({ name: "Jane Doe" });
+dataSource.initialize().then(async () => {
+  await dataSource.getRepository(Skill).save({ name: "Javascript" });
+  const jsSkill = await dataSource
+    .getRepository(Skill)
+    .findOneBy({ name: "Javascript" });
+  console.log("jsSkill", jsSkill);
+  dataSource
+    .getRepository(Wilder)
+    .save({ name: "Jane Doe", skills: [jsSkill] });
 });

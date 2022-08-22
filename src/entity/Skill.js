@@ -10,9 +10,7 @@ module.exports = new EntitySchema({
     },
     name: {
       type: "text",
-    },
-    votes: {
-      type: "int",
+      unique: true,
     },
   },
 });
