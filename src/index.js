@@ -8,4 +8,6 @@ const dataSource = new typeorm.DataSource({
   synchronize: true,
   entities: [Wilder],
 });
-dataSource.initialize().then(() => console.log("done"));
+dataSource.initialize().then(() => {
+  dataSource.getRepository(Wilder).save({ name: "Jane Doe" });
+});
