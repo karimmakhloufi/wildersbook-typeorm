@@ -1,11 +1,11 @@
-const sqlite3 = require("sqlite3").verbose();
 const typeorm = require("typeorm");
 
-const db = new sqlite3.Database("wildersdb");
+const Wilder = require("./entity/Wilder");
 
 const dataSource = new typeorm.DataSource({
   type: "sqlite",
-  database: "wildersdb",
+  database: "./wildersdb.sqlite",
   synchronize: true,
-  entities: [],
+  entities: [Wilder],
 });
+dataSource.initialize().then(() => console.log("done"));
