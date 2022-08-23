@@ -40,6 +40,24 @@ app.post("/wilder", async (req, res) => {
   }
 });
 
+app.put("/wilder", async (req, res) => {
+  try {
+    const wilderToUpdate = await dataSource
+      .getRepository(Wilder)
+      .findOneBy({ name: req.body.wilderName });
+    console.log(wilderToUpdate);
+    const skillToAdd = await dataSource
+      .getRepository(Skill)
+      .findOneBy({ name: req.body.skillName });
+    wilderToUpdate.skills = [...wilderToUpdate.skills, skillToAdd];
+    await dataSource.getRepository(Wilder).save(wilderToUpdate);
+    res.send("updated");
+  } catch (err) {
+    console.log(err);
+    res.send("error");
+  }
+});
+
 app.get("/skill", async (req, res) => {
   try {
     const skills = await dataSource.getRepository(Skill).find();

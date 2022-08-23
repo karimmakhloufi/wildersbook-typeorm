@@ -17,7 +17,7 @@ module.exports = new EntitySchema({
       target: "Skill",
       type: "many-to-many",
       joinTable: true,
-      cascade: true,
+      eager: true,
     },
   },
 });

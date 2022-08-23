@@ -7,3 +7,12 @@ Content-Type: application/json
 {
     "name": "test3"
 }
+
+###
+PUT http://localhost:3000/wilder
+Content-Type: application/json
+
+{
+    "skillName": "js",
+    "wilderName": "Jane Doe"
+}
