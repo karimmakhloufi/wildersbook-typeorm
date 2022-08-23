@@ -14,8 +14,50 @@ const dataSource = new typeorm.DataSource({
 const app = express();
 const port = 3000;
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
+});
+
+app.get("/wilder", async (req, res) => {
+  try {
+    const wilders = await dataSource.getRepository(Wilder).find();
+    res.send(wilders);
+  } catch (err) {
+    console.log(err);
+    res.send("error");
+  }
+});
+
+app.post("/wilder", async (req, res) => {
+  try {
+    await dataSource.getRepository(Wilder).save(req.body);
+    res.send("created");
+  } catch (err) {
+    console.log(err);
+    res.send("error");
+  }
+});
+
+app.get("/skill", async (req, res) => {
+  try {
+    const skills = await dataSource.getRepository(Skill).find();
+    res.send(skills);
+  } catch (err) {
+    console.log(err);
+    res.send("error");
+  }
+});
+
+app.post("/skill", async (req, res) => {
+  try {
+    await dataSource.getRepository(Skill).save(req.body);
+    res.send("created");
+  } catch (err) {
+    console.log(err);
+    res.send("error");
+  }
 });
 
 app.listen(port, () => {
